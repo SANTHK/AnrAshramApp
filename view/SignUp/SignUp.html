@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Asif Nagar Ashram</title>
+    <script src="../../../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="../../../node_modules/angular/angular.min.js"></script>
+    <link rel="stylesheet" href="../../../node_modules/font-awesome/css/font-awesome.min.css">
+    <script src="signUpController.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.0.1/ui-bootstrap-tpls.min.js"></script>
+    <script src="../../../node_modules/bootbox/bootbox.min.js"></script>
+    <script src="../../angular/constants/API.js"></script>
+</head>
+<body ng-app="AnrApp">
+<div class="container">
+    <div class="row main" ng-controller="signUpCntrl">
+
+        <div class="main-login main-center">
+            <form class="form-horizontal" name="AnrForm" method="post" ng-submit="Save()">
+                <div class="panel-heading">
+                    <div class="panel-title text-center" align="center">
+                        <img src="../../assets/images/DARBAR-LOGO-COLOR-SHRI-ANANDPUR.png" style="width: 50%; box-shadow: #0f0f0f"/>
+                    </div>
+                </div>
+                <div class="form-group" >
+                    <label for="name" class="cols-sm-2 control-label">Your Name</label>
+                    <div class="cols-sm-10" ng-class="{ 'has-error' : AnrForm.name.$invalid && !AnrForm.name.$pristine }">
+                        <div class="input-group" >
+                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" ng-model="data.Name" name="name" id="name"
+                                   placeholder="Enter your Name" required/>
+                        </div>
+                        <p align="center" ng-show="AnrForm.name.$invalid && !AnrForm.name.$pristine" class="help-block">Please Enter Your Name</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="phoneNum" class="cols-sm-2 control-label">Phone Number</label>
+                    <div class="cols-sm-10" ng-class="{ 'has-error' : AnrForm.phoneNum.$invalid && !AnrForm.phoneNum.$pristine }">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-mobile-phone fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" ng-model="data.phonenum" name="phoneNum" id="phoneNum"
+                                   placeholder="Enter your Mobile Number" minlength="10" maxlength="10" required/>
+                        </div>
+                        <p align="center" ng-show="AnrForm.phoneNum.$invalid && !AnrForm.phoneNum.$pristine" class="help-block">Please Enter Your 10 digit Mobile Number</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="cols-sm-2 control-label">Your Email</label>
+                    <div class="cols-sm-10" ng-class="{ 'has-error' : AnrForm.email.$invalid && !AnrForm.email.$pristine }">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" ng-model="data.mailId" name="email" id="email"
+                                   ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" placeholder="Enter your Email" />
+                        </div>
+                        <p align="center" ng-show="AnrForm.email.$invalid && !AnrForm.email.$pristine"
+                           class="help-block">Please Enter Valid Email Id</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="address" class="cols-sm-2 control-label">Address</label>
+                    <div class="cols-sm-10" ng-class="{ 'has-error' : AnrForm.address.$invalid && !AnrForm.address.$pristine }">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-map-marker fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" ng-model="data.location" name="address" id="address"
+                                   placeholder="Ex: Asif Nagar" required/>
+                        </div>
+                        <p align="center" ng-show="AnrForm.address.$invalid && !AnrForm.address.$pristine"
+                           class="help-block">Please Enter Valid Email Id</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="rehbar" class="cols-sm-2 control-label">Rehbar</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" ng-model="data.mukhya" name="rehbar" id="rehbar"  placeholder="Ex: Shyam Bhagat Ji"/>
+                        </div>
+                    </div>
+                </div>
+
+                <!--<div class="form-group">-->
+                    <!--<label for="password" class="cols-sm-2 control-label">Password</label>-->
+                    <!--<div class="cols-sm-10">-->
+                        <!--<div class="input-group">-->
+                            <!--<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>-->
+                            <!--<input type="password" class="form-control" name="password" id="password"  placeholder="Enter your Password"/>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <!--<div class="form-group">-->
+                    <!--<label for="confirm" class="cols-sm-2 control-label">Confirm Password</label>-->
+                    <!--<div class="cols-sm-10">-->
+                        <!--<div class="input-group">-->
+                            <!--<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>-->
+                            <!--<input type="password" class="form-control" name="confirm" id="confirm"  placeholder="Confirm your Password"/>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <div class="form-group ">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block login-button" ng-disabled="AnrForm.$invalid" >Register</button>
+                </div>
+                <!--<div class="login-register">-->
+                    <!--<a href="index.php">Login</a>-->
+                <!--</div>-->
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+<style>
+    body, html{
+        height: 100%;
+        background-repeat: no-repeat;
+        background-color: #d3d3d3;
+        font-family: 'Oxygen', sans-serif;
+    }
+
+    .main{
+        margin-top: 70px;
+    }
+
+    h1.title {
+        font-size: 50px;
+        font-family: 'Passion One', cursive;
+        font-weight: 400;
+    }
+
+    hr{
+        width: 10%;
+        color: #fff;
+    }
+
+    .form-group{
+        margin-bottom: 15px;
+    }
+
+    label{
+        margin-bottom: 15px;
+    }
+
+    input,
+    input::-webkit-input-placeholder {
+        font-size: 11px;
+        padding-top: 3px;
+    }
+
+    .main-login{
+        background-color: #fff;
+        /* shadows and rounded borders */
+        -moz-border-radius: 2px;
+        -webkit-border-radius: 2px;
+        border-radius: 2px;
+        -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+
+    }
+
+    .main-center{
+        margin-top: 30px;
+        margin: 0 auto;
+        max-width: 330px;
+        padding: 40px 40px;
+
+    }
+
+    .login-button{
+        margin-top: 5px;
+    }
+
+    .login-register{
+        font-size: 11px;
+        text-align: center;
+    }
+</style>
+</html>
